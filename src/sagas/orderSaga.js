@@ -16,7 +16,7 @@ function* addOrderItem(action) {
   try {
     const response = yield call(
       axios.post,
-      "http://localhost:4000/order",
+      "https://pizza-backend-eight.vercel.app/order",
       action.payload
     );
     yield put(addOrderItemSuccess(response.data));
@@ -34,7 +34,7 @@ function* fetchOrderSaga() {
   try {
     const response = yield call(
       axios.get,
-      "http://localhost:4000/order/get-order"
+      "https://pizza-backend-eight.vercel.app/order/get-order"
     );
     const data = yield response.data;
     yield put(fetchOrderSuccess(data));
@@ -51,7 +51,7 @@ function* fetchSpecificOrderSaga(action) {
   try {
     const response = yield call(
       axios.post,
-      "http://localhost:4000/order/get-customer-order",
+      "https://pizza-backend-eight.vercel.app/order/get-customer-order",
        action.payload 
     );
     console.log("saga:",action.payload)

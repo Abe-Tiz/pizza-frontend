@@ -24,7 +24,7 @@ function* addRole(action) {
   formData.append("permission", permission);
 
   try {
-  const response = yield call(axios.post, "http://localhost:4000/role", { name, permission });
+  const response = yield call(axios.post, "https://pizza-backend-eight.vercel.app/role", { name, permission });
     console.log("saga:", response);
     yield put(addRoleSuccess(response.data));
   } catch (error) {
@@ -40,7 +40,7 @@ export function* watchAddRole() {
 // display roles
 function* displayRole() {
   try {
-    const response = yield call(axios.get, "http://localhost:4000/role/view-role")
+    const response = yield call(axios.get, "https://pizza-backend-eight.vercel.app/role/view-role")
     const data = response.data;
     yield put(fetchRoleSuccess(data));
   } catch (error) {

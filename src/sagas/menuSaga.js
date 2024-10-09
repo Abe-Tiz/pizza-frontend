@@ -31,7 +31,7 @@ function* addMenuItem(action) {
   try {
     const response = yield call(
       axios.post,
-      "http://localhost:4000/menu",
+      "https://pizza-backend-eight.vercel.app/menu",
       formData,
       {
         headers: {
@@ -53,7 +53,7 @@ export function* watchAddMenuItem() {
 // fetch menu
 function* fetchMenuSaga() {
   try {
-    const response = yield call(axios.get, "http://localhost:4000/menu/get-menu");
+    const response = yield call(axios.get, "https://pizza-backend-eight.vercel.app/menu/get-menu");
     const data = yield response.data;
     yield put(fetchMenuSuccess(data));
   } catch (error) {
@@ -68,7 +68,7 @@ export function* watchFetchMenu() {
 // fetch menu
 function* deleteMenuSaga() {
   try {
-    const response = yield call(axios.delete, "http://localhost:4000/menu/delete/:id");
+    const response = yield call(axios.delete, "https://pizza-backend-eight.vercel.app/menu/delete/:id");
     const data = yield response.data;
     yield put(deleteMenuSuccess(data));
   } catch (error) {

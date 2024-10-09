@@ -25,7 +25,7 @@ function* registerUser(action) {
   try {
     const response = yield call(
       axios.post,
-      "http://localhost:4000/user/register",
+      "https://pizza-backend-eight.vercel.app/user/register",
       action.payload
     );
     console.log("response:",response.data)
@@ -41,7 +41,7 @@ function* loginUser(action) {
   try {
     const response = yield call(
       axios.post,
-      "http://localhost:4000/user/login",
+      "https://pizza-backend-eight.vercel.app/user/login",
       action.payload
     );
     // console.log("response:",response.data)
@@ -57,7 +57,7 @@ function* createCustomer(action) {
   try {
     const response = yield call(
       axios.post,
-      "http://localhost:4000/user/create-customer",
+      "https://pizza-backend-eight.vercel.app/user/create-customer",
       action.payload
     );
     // console.log("response:",response.data)
@@ -73,7 +73,7 @@ function* loginCustomer(action) {
   try {
     const response = yield call(
       axios.post,
-      "http://localhost:4000/user/login-user",
+      "https://pizza-backend-eight.vercel.app/user/login-user",
       action.payload
     );
     yield put(CUSTOMER_LOGIN_SUCCESS(response.data));
@@ -87,7 +87,7 @@ function* loginCustomer(action) {
 // get restaurants
 function* fetchRestaurantSaga() {
   try {
-     const response = yield call(axios.get, "http://localhost:4000/user/admin");
+     const response = yield call(axios.get, "https://pizza-backend-eight.vercel.app/user/admin");
     const data = response.data; 
     yield put(FetchRestaurantSuccess(data));
     //  console.log("results:", result.payload);
