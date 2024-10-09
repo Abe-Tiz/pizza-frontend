@@ -32,7 +32,7 @@ function* addMenuItem(action) {
     const response = yield call(
       axios.post,
       "https://pizza-backend-eight.vercel.app/menu",
-      formData,
+      { name, toppings, price, photo,restaurant_id },
       {
         headers: {
           "Content-Type": "multipart/form-data",
