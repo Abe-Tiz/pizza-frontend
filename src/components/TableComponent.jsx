@@ -95,18 +95,20 @@ const TableComponent = ({
               .map((row) => (
                 <TableRow key={row.id || row.name}>
                   {row.name && <TableCell>{row.name}</TableCell>}
-                  
-                 { row.toppings && <TableCell style={{ color: "#fc9936" }} align="right">
-                    <Tooltip title="View Toppings">
-                      <IconButton
-                        sx={{ color: "#fc9936" }}
-                        onClick={() => handleModalOpen(row)}
-                      >
-                        <Visibility />
-                      </IconButton>
-                    </Tooltip>
-                    Toppings
-                  </TableCell>}
+
+                  {row.toppings && (
+                    <TableCell style={{ color: "#fc9936" }} align="right">
+                      <Tooltip title="View Toppings">
+                        <IconButton
+                          sx={{ color: "#fc9936" }}
+                          onClick={() => handleModalOpen(row)}
+                        >
+                          <Visibility />
+                        </IconButton>
+                      </Tooltip>
+                      Toppings
+                    </TableCell>
+                  )}
                   {row.quantity && (
                     <TableCell align="right">{row.quantity}</TableCell>
                   )}
@@ -114,40 +116,42 @@ const TableComponent = ({
                     <TableCell align="right">{row.phone}</TableCell>
                   )}
                   <TableCell align="right">
-                    {new Date(row.created_date).toISOString().split("T")[0]}
+                    {new Date(row.createdat).toLocaleDateString("en-US")}
                   </TableCell>
 
-                { row.status &&  <TableCell align="right">
-                    {status[row.id] === "Delivered" ||
-                    row.status === "Delivered" ? (
-                      <Typography sx={{ color: "green" }}>
-                        <CheckCircle
+                  {row.status && (
+                    <TableCell align="right">
+                      {status[row.id] === "Delivered" ||
+                      row.status === "Delivered" ? (
+                        <Typography sx={{ color: "green" }}>
+                          <CheckCircle
+                            style={{
+                              verticalAlign: "middle",
+                              marginRight: 4,
+                              color: "green",
+                            }}
+                          />
+                          Delivered
+                        </Typography>
+                      ) : (
+                        <Select
                           style={{
-                            verticalAlign: "middle",
-                            marginRight: 4,
-                            color: "green",
+                            ...getStatusStyle(status[row.id] || "Preparing"),
+                            width: "100px",
+                            height: "40px",
                           }}
-                        />
-                        Delivered
-                      </Typography>
-                    ) : (
-                      <Select
-                        style={{
-                          ...getStatusStyle(status[row.id] || "Preparing"),
-                          width: "100px",
-                          height: "40px",
-                        }}
-                        value={status[row.id] || "Preparing"}
-                        onChange={(e) =>
-                          handleStatusChange(row.id, e.target.value)
-                        }
-                      >
-                        <MenuItem value="Preparing">Preparing</MenuItem>
-                        <MenuItem value="Ready">Ready</MenuItem>
-                        <MenuItem value="Delivered">Delivered</MenuItem>
-                      </Select>
-                    )}
-                  </TableCell>}
+                          value={status[row.id] || "Preparing"}
+                          onChange={(e) =>
+                            handleStatusChange(row.id, e.target.value)
+                          }
+                        >
+                          <MenuItem value="Preparing">Preparing</MenuItem>
+                          <MenuItem value="Ready">Ready</MenuItem>
+                          <MenuItem value="Delivered">Delivered</MenuItem>
+                        </Select>
+                      )}
+                    </TableCell>
+                  )}
                   <TableCell align="right">
                     {onToggleStatus && (
                       <FormControlLabel
